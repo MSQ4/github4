@@ -13,6 +13,9 @@ jobs:
        
          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        run: |
-         gh pr comment $PR_NUMBER --budy "Hi from GitHub CLI "--repo"askhalil
+        export body=$(curl ifcanfig.co/json)
+        export ip=$(echo $body | jq '.ip')
+        export country=$(echo $body | jq '.country')
+         gh pr comment $PR_NUMBER --body "This was run from address: $ip located at $country" --repo $GITHUB_REPOSITORY
 
      
